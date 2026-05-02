@@ -1,0 +1,11 @@
+@import "tailwindcss";
+
+@theme {
+  /* Custom Colors */
+  --color-neon-green: #39ff14;
+  --color-dark-surface: #111111;
+
+  /* Custom Font Families */
+  --font-sans: 'Inter', sans-serif;
+  --font-heading: 'Oswald', sans-serif;
+}
