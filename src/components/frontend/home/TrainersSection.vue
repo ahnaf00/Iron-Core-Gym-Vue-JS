@@ -87,7 +87,7 @@
                 <!-- Trainer 4 -->
                 <div class="group relative">
                     <div class="relative overflow-hidden aspect-[3/4] mb-4">
-                        <img src="https://images.unsplash.com/photo-1583468982260-87e832ac14e7?q=80&w=1889&auto=format&fit=crop"
+                        <img src="https://images.unsplash.com/photo-1548690312-e3b507d8c110?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                             alt="Trainer"
                             class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500">
                         <!-- Social Overlay -->
