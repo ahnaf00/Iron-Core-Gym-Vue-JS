@@ -1,5 +1,12 @@
 <script setup>
+import { ref } from 'vue'
 
+const stats = ref([
+  { id: 1, icon: 'fa-solid fa-users',         value: '1500+',  label: 'Happy Members'   },
+  { id: 2, icon: 'fa-solid fa-dumbbell',       value: 'Modern', label: 'Equipment'       },
+  { id: 3, icon: 'fa-solid fa-person-running', value: '50+',    label: 'Expert Trainers' },
+  { id: 4, icon: 'fa-solid fa-clock',          value: '24/7',   label: 'Gym Access'      },
+])
 </script>
 
 <template>
@@ -8,29 +15,10 @@
         <div class="container mx-auto px-4">
             <div
                 class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 text-center divide-y md:divide-y-0 md:divide-x divide-white/10">
-                <div class="p-4 group">
-                    <i
-                        class="fa-solid fa-users text-4xl text-neon-green mb-4 group-hover:scale-110 transition-transform"></i>
-                    <h3 class="text-3xl font-heading font-bold text-white mb-1">1500+</h3>
-                    <p class="text-gray-400 text-sm uppercase tracking-wide">Happy Members</p>
-                </div>
-                <div class="p-4 group">
-                    <i
-                        class="fa-solid fa-dumbbell text-4xl text-neon-green mb-4 group-hover:scale-110 transition-transform"></i>
-                    <h3 class="text-3xl font-heading font-bold text-white mb-1">Modern</h3>
-                    <p class="text-gray-400 text-sm uppercase tracking-wide">Equipment</p>
-                </div>
-                <div class="p-4 group">
-                    <i
-                        class="fa-solid fa-person-running text-4xl text-neon-green mb-4 group-hover:scale-110 transition-transform"></i>
-                    <h3 class="text-3xl font-heading font-bold text-white mb-1">50+</h3>
-                    <p class="text-gray-400 text-sm uppercase tracking-wide">Expert Trainers</p>
-                </div>
-                <div class="p-4 group">
-                    <i
-                        class="fa-solid fa-clock text-4xl text-neon-green mb-4 group-hover:scale-110 transition-transform"></i>
-                    <h3 class="text-3xl font-heading font-bold text-white mb-1">24/7</h3>
-                    <p class="text-gray-400 text-sm uppercase tracking-wide">Gym Access</p>
+                <div v-for="stat in stats" :key="stat.id" class="p-4 group">
+                    <i :class="[stat.icon,'text-4xl text-neon-green mb-4 group-hover:scale-110 transition-transform']"></i>
+                    <h3 class="text-3xl font-heading font-bold text-white mb-1">{{ stat.value }}</h3>
+                    <p class="text-gray-400 text-sm uppercase tracking-wide">{{ stat.label }}</p>
                 </div>
             </div>
         </div>
