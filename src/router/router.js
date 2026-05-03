@@ -5,7 +5,7 @@ import ClassesPage from '../components/pages/frontend/ClassesPage.vue'
 import Trainers from '../components/pages/frontend/Trainers.vue'
 import Pricing from '../components/pages/frontend/Pricing.vue'
 import Blog from '../components/pages/frontend/Blog.vue'
-import Contac from '../components/pages/frontend/Contac.vue'
+import Contact from '../components/pages/frontend/Contact.vue'
 
 const routes = [
     {
@@ -34,7 +34,7 @@ const routes = [
     },
     {
         path:'/contact',
-        component:Contac
+        component:Contact
     }
 ]
 
