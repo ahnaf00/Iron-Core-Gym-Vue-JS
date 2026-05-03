@@ -1,5 +1,50 @@
 <script setup>
+import { ref } from 'vue'
+import TrainerCard from './TrainerCard.vue';
 
+const trainers = ref([
+  {
+    id: 1,
+    name: 'John Doe',
+    role: 'CrossFit Expert',
+    image: 'https://images.unsplash.com/photo-1567013127542-490d757e51fc?q=80&w=1887&auto=format&fit=crop',
+    socials: [
+      { id: 1, icon: 'fa-brands fa-facebook-f', href: '#' },
+      { id: 2, icon: 'fa-brands fa-instagram',  href: '#' },
+      { id: 3, icon: 'fa-brands fa-twitter',    href: '#' },
+    ],
+  },
+  {
+    id: 2,
+    name: 'Jane Smith',
+    role: 'Yoga Instructor',
+    image: 'https://images.unsplash.com/photo-1611672585731-fa10603fb9e0?q=80&w=1887&auto=format&fit=crop',
+    socials: [
+      { id: 1, icon: 'fa-brands fa-facebook-f', href: '#' },
+      { id: 2, icon: 'fa-brands fa-instagram',  href: '#' },
+    ],
+  },
+  {
+    id: 3,
+    name: 'Mike Tyson',
+    role: 'Boxing Coach',
+    image: 'https://images.unsplash.com/photo-1597452485669-2c7bb5fef90d?q=80&w=1887&auto=format&fit=crop',
+    socials: [
+      { id: 1, icon: 'fa-brands fa-facebook-f', href: '#' },
+      { id: 2, icon: 'fa-brands fa-instagram',  href: '#' },
+    ],
+  },
+  {
+    id: 4,
+    name: 'Sarah Connor',
+    role: 'Cardio Specialist',
+    image: 'https://images.unsplash.com/photo-1548690312-e3b507d8c110?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    socials: [
+      { id: 1, icon: 'fa-brands fa-facebook-f', href: '#' },
+      { id: 2, icon: 'fa-brands fa-instagram',  href: '#' },
+    ],
+  },
+])
 </script>
 
 <template>
@@ -12,100 +57,13 @@
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                <!-- Trainer 1 -->
-                <div class="group relative">
-                    <div class="relative overflow-hidden aspect-[3/4] mb-4">
-                        <img src="https://images.unsplash.com/photo-1567013127542-490d757e51fc?q=80&w=1887&auto=format&fit=crop"
-                            alt="Trainer"
-                            class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500">
-                        <!-- Social Overlay -->
-                        <div
-                            class="absolute inset-0 bg-black/60 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <a href="#"
-                                class="w-10 h-10 bg-neon-green text-black flex items-center justify-center rounded-full hover:bg-white transition-colors"><i
-                                    class="fa-brands fa-facebook-f"></i></a>
-                            <a href="#"
-                                class="w-10 h-10 bg-neon-green text-black flex items-center justify-center rounded-full hover:bg-white transition-colors"><i
-                                    class="fa-brands fa-instagram"></i></a>
-                            <a href="#"
-                                class="w-10 h-10 bg-neon-green text-black flex items-center justify-center rounded-full hover:bg-white transition-colors"><i
-                                    class="fa-brands fa-twitter"></i></a>
-                        </div>
-                    </div>
-                    <div class="text-center">
-                        <h3 class="text-xl font-heading font-bold text-white uppercase">John Doe</h3>
-                        <p class="text-neon-green text-sm font-bold tracking-wide">CrossFit Expert</p>
-                    </div>
-                </div>
+                <!-- Trainer card -->
+                <TrainerCard
+                    v-for="trainer in trainers"
+                    :key="trainer.id"
+                    :trainer="trainer"
+                />
 
-                <!-- Trainer 2 -->
-                <div class="group relative">
-                    <div class="relative overflow-hidden aspect-[3/4] mb-4">
-                        <img src="https://images.unsplash.com/photo-1611672585731-fa10603fb9e0?q=80&w=1887&auto=format&fit=crop"
-                            alt="Trainer"
-                            class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500">
-                        <!-- Social Overlay -->
-                        <div
-                            class="absolute inset-0 bg-black/60 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <a href="#"
-                                class="w-10 h-10 bg-neon-green text-black flex items-center justify-center rounded-full hover:bg-white transition-colors"><i
-                                    class="fa-brands fa-facebook-f"></i></a>
-                            <a href="#"
-                                class="w-10 h-10 bg-neon-green text-black flex items-center justify-center rounded-full hover:bg-white transition-colors"><i
-                                    class="fa-brands fa-instagram"></i></a>
-                        </div>
-                    </div>
-                    <div class="text-center">
-                        <h3 class="text-xl font-heading font-bold text-white uppercase">Jane Smith</h3>
-                        <p class="text-neon-green text-sm font-bold tracking-wide">Yoga Instructor</p>
-                    </div>
-                </div>
-
-                <!-- Trainer 3 -->
-                <div class="group relative">
-                    <div class="relative overflow-hidden aspect-[3/4] mb-4">
-                        <img src="https://images.unsplash.com/photo-1597452485669-2c7bb5fef90d?q=80&w=1887&auto=format&fit=crop"
-                            alt="Trainer"
-                            class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500">
-                        <!-- Social Overlay -->
-                        <div
-                            class="absolute inset-0 bg-black/60 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <a href="#"
-                                class="w-10 h-10 bg-neon-green text-black flex items-center justify-center rounded-full hover:bg-white transition-colors"><i
-                                    class="fa-brands fa-facebook-f"></i></a>
-                            <a href="#"
-                                class="w-10 h-10 bg-neon-green text-black flex items-center justify-center rounded-full hover:bg-white transition-colors"><i
-                                    class="fa-brands fa-instagram"></i></a>
-                        </div>
-                    </div>
-                    <div class="text-center">
-                        <h3 class="text-xl font-heading font-bold text-white uppercase">Mike Tyson</h3>
-                        <p class="text-neon-green text-sm font-bold tracking-wide">Boxing Coach</p>
-                    </div>
-                </div>
-
-                <!-- Trainer 4 -->
-                <div class="group relative">
-                    <div class="relative overflow-hidden aspect-[3/4] mb-4">
-                        <img src="https://images.unsplash.com/photo-1548690312-e3b507d8c110?q=80&w=687&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-                            alt="Trainer"
-                            class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500">
-                        <!-- Social Overlay -->
-                        <div
-                            class="absolute inset-0 bg-black/60 flex items-center justify-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <a href="#"
-                                class="w-10 h-10 bg-neon-green text-black flex items-center justify-center rounded-full hover:bg-white transition-colors"><i
-                                    class="fa-brands fa-facebook-f"></i></a>
-                            <a href="#"
-                                class="w-10 h-10 bg-neon-green text-black flex items-center justify-center rounded-full hover:bg-white transition-colors"><i
-                                    class="fa-brands fa-instagram"></i></a>
-                        </div>
-                    </div>
-                    <div class="text-center">
-                        <h3 class="text-xl font-heading font-bold text-white uppercase">Sarah Connor</h3>
-                        <p class="text-neon-green text-sm font-bold tracking-wide">Cardio Specialist</p>
-                    </div>
-                </div>
             </div>
         </div>
     </section>
