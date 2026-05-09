@@ -1,6 +1,6 @@
 <script setup>
 import { ref } from 'vue'
-import TrainerCard from './TrainerCard.vue';
+import TrainerCard from '../../ui/TrainerCard.vue';
 
 const trainers = ref([
   {
