@@ -2,7 +2,7 @@
 import Footer from '../../common/Footer.vue';
 import Header from '../../common/Header.vue';
 import TrainingHeader from '../../frontend/trainers/TrainingHeader.vue';
-import TtrainersInfo from '../../frontend/trainers/TtrainersInfo.vue';
+import TtrainersInfo from '../../frontend/trainers/TrainersInfo.vue';
 
 
 </script>
