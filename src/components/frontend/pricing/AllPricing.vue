@@ -1,5 +1,66 @@
 <script setup>
+import { ref, computed } from 'vue'
+import PricingCard from './PricingCard.vue'
 
+const isYearly = ref(false)
+
+const plans = ref([
+  {
+    id: 1,
+    name: 'Beginner',
+    description: 'Perfect for starters looking to get fit.',
+    monthlyPrice: 29,
+    yearlyPrice: 279,
+    featured: false,
+    features: [
+      { id: 1, label: '06:00 - 22:00 Access',  included: true  },
+      { id: 2, label: 'Standard Equipment',     included: true  },
+      { id: 3, label: 'Locker Room Access',     included: true  },
+      { id: 4, label: 'Personal Trainer',       included: false },
+      { id: 5, label: 'Nutrition Guide',        included: false },
+    ],
+  },
+  {
+    id: 2,
+    name: 'Pro Athlete',
+    description: 'For dedicated gym goers.',
+    monthlyPrice: 49,
+    yearlyPrice: 469,
+    featured: true,
+    features: [
+      { id: 1, label: '24/7 Gym Access',        included: true  },
+      { id: 2, label: 'All Equipment',          included: true  },
+      { id: 3, label: 'Free Group Classes',     included: true  },
+      { id: 4, label: '1 Personal Session/mo',  included: true  },
+      { id: 5, label: 'Nutrition Guide',        included: false },
+    ],
+  },
+  {
+    id: 3,
+    name: 'Elite',
+    description: 'Maximum performance package.',
+    monthlyPrice: 89,
+    yearlyPrice: 859,
+    featured: false,
+    features: [
+      { id: 1, label: '24/7 VIP Access',        included: true },
+      { id: 2, label: 'All Equipment + Sauna',  included: true },
+      { id: 3, label: 'Unlimited Classes',      included: true },
+      { id: 4, label: '4 Personal Sessions/mo', included: true },
+      { id: 5, label: 'Full Nutrition Guide',   included: true },
+    ],
+  },
+])
+
+// Derive each plan's display price from the toggle state
+const displayPrices = computed(() =>
+  Object.fromEntries(
+    plans.value.map((plan) => [
+      plan.id,
+      isYearly.value ? plan.yearlyPrice : plan.monthlyPrice,
+    ])
+  )
+)
 </script>
 
 <template>
@@ -21,91 +82,13 @@
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto">
 
-                <!-- Beginner Plan -->
-                <div
-                    class="border border-white/10 bg-black p-8 flex flex-col group hover:border-white/30 transition-all duration-300">
-                    <h3 class="text-xl font-heading font-bold text-white uppercase mb-4">Beginner</h3>
-                    <p class="text-gray-400 text-sm mb-6">Perfect for starters looking to get fit.</p>
-                    <div class="mb-8">
-                        <span class="text-4xl font-bold text-white price-amount" data-monthly="29"
-                            data-yearly="279">$29</span>
-                        <span class="text-gray-500 price-period">/ Month</span>
-                    </div>
-                    <ul class="space-y-4 mb-8 flex-grow text-gray-400 text-sm">
-                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-neon-green"></i> 06:00 -
-                            22:00 Access</li>
-                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-neon-green"></i> Standard
-                            Equipment</li>
-                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-neon-green"></i> Locker
-                            Room Access</li>
-                        <li class="flex items-center gap-3 opacity-50"><i class="fa-solid fa-xmark"></i> Personal
-                            Trainer</li>
-                        <li class="flex items-center gap-3 opacity-50"><i class="fa-solid fa-xmark"></i> Nutrition Guide
-                        </li>
-                    </ul>
-                    <a href="#"
-                        class="block text-center py-3 border border-white/20 text-white font-heading font-bold uppercase tracking-wider hover:bg-neon-green hover:border-neon-green hover:text-black transition-all duration-300">
-                        Choose Plan
-                    </a>
-                </div>
-
-                <!-- Pro Plan (Highlighted) -->
-                <div
-                    class="border-2 border-neon-green bg-white/5 p-8 flex flex-col relative transform md:-translate-y-4 shadow-[0_0_20px_rgba(57,255,20,0.1)]">
-                    <div class="absolute top-0 right-0 bg-neon-green text-black text-xs font-bold uppercase px-4 py-1">
-                        Recommended</div>
-                    <h3 class="text-xl font-heading font-bold text-white uppercase mb-4">Pro Athlete</h3>
-                    <p class="text-gray-400 text-sm mb-6">For dedicated gym goers.</p>
-                    <div class="mb-8">
-                        <span class="text-5xl font-bold text-neon-green price-amount" data-monthly="49"
-                            data-yearly="469">$49</span>
-                        <span class="text-gray-500 price-period">/ Month</span>
-                    </div>
-                    <ul class="space-y-4 mb-8 flex-grow text-gray-300 text-sm font-medium">
-                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-neon-green"></i> 24/7 Gym
-                            Access</li>
-                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-neon-green"></i> All
-                            Equipment</li>
-                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-neon-green"></i> Free Group
-                            Classes</li>
-                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-neon-green"></i> 1 Personal
-                            Session/mo</li>
-                        <li class="flex items-center gap-3 opacity-50"><i class="fa-solid fa-xmark"></i> Nutrition Guide
-                        </li>
-                    </ul>
-                    <a href="#"
-                        class="block text-center py-4 bg-neon-green text-black font-heading font-bold uppercase tracking-wider hover:bg-white transition-all duration-300 clip-path-slant">
-                        Choose Plan
-                    </a>
-                </div>
-
-                <!-- Athlete Plan -->
-                <div
-                    class="border border-white/10 bg-black p-8 flex flex-col group hover:border-white/30 transition-all duration-300">
-                    <h3 class="text-xl font-heading font-bold text-white uppercase mb-4">Elite</h3>
-                    <p class="text-gray-400 text-sm mb-6">Maximum performance package.</p>
-                    <div class="mb-8">
-                        <span class="text-4xl font-bold text-white price-amount" data-monthly="89"
-                            data-yearly="859">$89</span>
-                        <span class="text-gray-500 price-period">/ Month</span>
-                    </div>
-                    <ul class="space-y-4 mb-8 flex-grow text-gray-400 text-sm">
-                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-neon-green"></i> 24/7 VIP
-                            Access</li>
-                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-neon-green"></i> All
-                            Equipment + Sauna</li>
-                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-neon-green"></i> Unlimited
-                            Classes</li>
-                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-neon-green"></i> 4 Personal
-                            Sessions/mo</li>
-                        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-neon-green"></i> Full
-                            Nutrition Guide</li>
-                    </ul>
-                    <a href="#"
-                        class="block text-center py-3 border border-white/20 text-white font-heading font-bold uppercase tracking-wider hover:bg-neon-green hover:border-neon-green hover:text-black transition-all duration-300">
-                        Choose Plan
-                    </a>
-                </div>
+               <PricingCard
+                    v-for="plan in plans"
+                    :key="plan.id"
+                    :plan="plan"
+                    :display-price="displayPrices[plan.id]"
+                    :is-yearly="isYearly"
+               ></PricingCard>
 
             </div>
         </div>

@@ -1,5 +1,5 @@
 <script setup>
-
+import { RouterLink } from 'vue-router';
 </script>
 
 <template>
@@ -14,7 +14,7 @@
             </h1>
             <nav aria-label="Breadcrumb" class="flex justify-center">
                 <ol class="flex items-center space-x-2 text-sm text-gray-400 uppercase tracking-wide">
-                    <li><a href="index.html" class="hover:text-neon-green transition-colors">Home</a></li>
+                    <RouterLink to="/" class="hover:text-neon-green transition-colors">Home</RouterLink>
                     <li><span class="text-neon-green">/</span></li>
                     <li class="text-white" aria-current="page">Pricing</li>
                 </ol>
