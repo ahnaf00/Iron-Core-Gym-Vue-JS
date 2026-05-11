@@ -1,5 +1,24 @@
 <script setup>
+import { ref } from 'vue'
+import { RouterLink } from 'vue-router'
 
+const searchQuery = ref('')
+
+const categories = ref([
+  { id: 1, label: 'Fitness',     count: 12 },
+  { id: 2, label: 'Nutrition',   count: 8  },
+  { id: 3, label: 'Lifestyle',   count: 5  },
+  { id: 4, label: 'Weight Loss', count: 3  },
+])
+
+const tags = ref([
+  { id: 1, label: '#gym'     },
+  { id: 2, label: '#fitness' },
+  { id: 3, label: '#healthy' },
+  { id: 4, label: '#cardio'  },
+  { id: 5, label: '#trainer' },
+  { id: 6, label: '#workout' },
+])
 </script>
 
 <template>
@@ -10,8 +29,10 @@
             <div class="bg-black border border-white/10 p-8">
                 <h3 class="text-xl font-heading font-bold text-white uppercase mb-6 border-l-4 border-neon-green pl-3">
                     Search</h3>
-                <form class="relative" onsubmit="event.preventDefault();">
-                    <input type="text" placeholder="Search..."
+                <form class="relative" @submit.prevent>
+                    <input
+                        v-model="searchQuery"
+                        type="text" placeholder="Search..."
                         class="w-full bg-dark-surface border border-white/20 p-4 text-white placeholder-gray-500 focus:border-neon-green focus:outline-none transition-colors">
                     <button type="submit"
                         class="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-neon-green transition-colors">
@@ -25,40 +46,15 @@
                 <h3 class="text-xl font-heading font-bold text-white uppercase mb-6 border-l-4 border-neon-green pl-3">
                     Categories</h3>
                 <ul class="space-y-4">
-                    <li>
+                    <li
+                        v-for="cat in categories"
+                        :key="cat.id"
+                    >
                         <a href="#"
                             class="flex justify-between items-center text-gray-400 hover:text-neon-green transition-colors group">
                             <span><i
-                                    class="fa-solid fa-chevron-right text-xs mr-2 text-neon-green opacity-0 group-hover:opacity-100 transition-opacity"></i>
-                                Fitness</span>
-                            <span class="text-sm bg-white/5 px-2 py-1 rounded">(12)</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#"
-                            class="flex justify-between items-center text-gray-400 hover:text-neon-green transition-colors group">
-                            <span><i
-                                    class="fa-solid fa-chevron-right text-xs mr-2 text-neon-green opacity-0 group-hover:opacity-100 transition-opacity"></i>
-                                Nutrition</span>
-                            <span class="text-sm bg-white/5 px-2 py-1 rounded">(8)</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#"
-                            class="flex justify-between items-center text-gray-400 hover:text-neon-green transition-colors group">
-                            <span><i
-                                    class="fa-solid fa-chevron-right text-xs mr-2 text-neon-green opacity-0 group-hover:opacity-100 transition-opacity"></i>
-                                Lifestyle</span>
-                            <span class="text-sm bg-white/5 px-2 py-1 rounded">(5)</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#"
-                            class="flex justify-between items-center text-gray-400 hover:text-neon-green transition-colors group">
-                            <span><i
-                                    class="fa-solid fa-chevron-right text-xs mr-2 text-neon-green opacity-0 group-hover:opacity-100 transition-opacity"></i>
-                                Weight Loss</span>
-                            <span class="text-sm bg-white/5 px-2 py-1 rounded">(3)</span>
+                                    class="fa-solid fa-chevron-right text-xs mr-2 text-neon-green opacity-0 group-hover:opacity-100 transition-opacity"></i>{{ cat.label }}</span>
+                            <span class="text-sm bg-white/5 px-2 py-1 rounded">({{ cat.count }})</span>
                         </a>
                     </li>
                 </ul>
@@ -69,18 +65,11 @@
                 <h3 class="text-xl font-heading font-bold text-white uppercase mb-6 border-l-4 border-neon-green pl-3">
                     Popular Tags</h3>
                 <div class="flex flex-wrap gap-2">
-                    <a href="#"
-                        class="px-3 py-1 bg-white/5 border border-white/10 text-gray-400 text-sm hover:bg-neon-green hover:text-black hover:border-neon-green transition-colors">#gym</a>
-                    <a href="#"
-                        class="px-3 py-1 bg-white/5 border border-white/10 text-gray-400 text-sm hover:bg-neon-green hover:text-black hover:border-neon-green transition-colors">#fitness</a>
-                    <a href="#"
-                        class="px-3 py-1 bg-white/5 border border-white/10 text-gray-400 text-sm hover:bg-neon-green hover:text-black hover:border-neon-green transition-colors">#healthy</a>
-                    <a href="#"
-                        class="px-3 py-1 bg-white/5 border border-white/10 text-gray-400 text-sm hover:bg-neon-green hover:text-black hover:border-neon-green transition-colors">#cardio</a>
-                    <a href="#"
-                        class="px-3 py-1 bg-white/5 border border-white/10 text-gray-400 text-sm hover:bg-neon-green hover:text-black hover:border-neon-green transition-colors">#trainer</a>
-                    <a href="#"
-                        class="px-3 py-1 bg-white/5 border border-white/10 text-gray-400 text-sm hover:bg-neon-green hover:text-black hover:border-neon-green transition-colors">#workout</a>
+                    <a
+                        v-for="tag in tags"
+                        :key="tag.id"
+                        href="#"
+                        class="px-3 py-1 bg-white/5 border border-white/10 text-gray-400 text-sm hover:bg-neon-green hover:text-black hover:border-neon-green transition-colors">{{ tag.label }}</a>
                 </div>
             </div>
 
