@@ -1,5 +1,57 @@
 <script setup>
+import { ref, reactive } from 'vue'
+import ContactInfoCard from './ContactInfoCard.vue'
 
+// ── Info cards ────────────────────────────────────────────────
+const infoCards = ref([
+  {
+    id: 1,
+    icon: 'fa-solid fa-location-dot',
+    title: 'Location',
+    text: '123 Iron Street, Muscle City, MC 90210, United States',
+  },
+  {
+    id: 2,
+    icon: 'fa-solid fa-phone',
+    title: 'Phone',
+    text: '+1 (234) 567-890',
+    href: 'tel:+1234567890',
+  },
+  {
+    id: 3,
+    icon: 'fa-solid fa-envelope',
+    title: 'Email',
+    text: 'info@ironcoregym.com',
+    href: 'mailto:info@ironcoregym.com',
+  },
+  {
+    id: 4,
+    icon: 'fa-solid fa-clock',
+    title: 'Hours',
+    text: 'Mon - Sun: 6:00 AM - 10:00 PM',
+  },
+])
+
+// ── Contact form ──────────────────────────────────────────────
+const form = reactive({
+  name:    '',
+  email:   '',
+  subject: '',
+  message: '',
+})
+
+// Submission state: 'idle' | 'success' | 'error'
+const submitStatus = ref('idle')
+
+function handleSubmit() {
+  // Basic guard — all fields required
+  if (!form.name || !form.email || !form.subject || !form.message) return
+
+  submitStatus.value = 'success'
+
+  // Reset form
+  Object.assign(form, { name: '', email: '', subject: '', message: '' })
+}
 </script>
 
 <template>
@@ -12,48 +64,11 @@
 
                     <!-- Info Grid -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                        <div
-                            class="bg-black border border-white/10 p-6 group hover:border-neon-green transition-colors">
-                            <div
-                                class="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center text-neon-green text-xl mb-4 group-hover:bg-neon-green group-hover:text-black transition-colors">
-                                <i class="fa-solid fa-location-dot"></i>
-                            </div>
-                            <h3 class="text-lg font-heading font-bold text-white uppercase mb-2">Location</h3>
-                            <p class="text-gray-400 text-sm">123 Iron Street, Muscle City, MC 90210, United States</p>
-                        </div>
-                        <div
-                            class="bg-black border border-white/10 p-6 group hover:border-neon-green transition-colors">
-                            <div
-                                class="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center text-neon-green text-xl mb-4 group-hover:bg-neon-green group-hover:text-black transition-colors">
-                                <i class="fa-solid fa-phone"></i>
-                            </div>
-                            <h3 class="text-lg font-heading font-bold text-white uppercase mb-2">Phone</h3>
-                            <p class="text-gray-400 text-sm">
-                                <a href="tel:+1234567890" class="hover:text-white transition-colors">+1 (234)
-                                    567-890</a>
-                            </p>
-                        </div>
-                        <div
-                            class="bg-black border border-white/10 p-6 group hover:border-neon-green transition-colors">
-                            <div
-                                class="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center text-neon-green text-xl mb-4 group-hover:bg-neon-green group-hover:text-black transition-colors">
-                                <i class="fa-solid fa-envelope"></i>
-                            </div>
-                            <h3 class="text-lg font-heading font-bold text-white uppercase mb-2">Email</h3>
-                            <p class="text-gray-400 text-sm">
-                                <a href="mailto:info@ironcoregym.com"
-                                    class="hover:text-white transition-colors">info@ironcoregym.com</a>
-                            </p>
-                        </div>
-                        <div
-                            class="bg-black border border-white/10 p-6 group hover:border-neon-green transition-colors">
-                            <div
-                                class="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center text-neon-green text-xl mb-4 group-hover:bg-neon-green group-hover:text-black transition-colors">
-                                <i class="fa-solid fa-clock"></i>
-                            </div>
-                            <h3 class="text-lg font-heading font-bold text-white uppercase mb-2">Hours</h3>
-                            <p class="text-gray-400 text-sm">Mon - Sun: 6:00 AM - 10:00 PM</p>
-                        </div>
+                        <ContactInfoCard
+                            v-for="card in infoCards"
+                            :key="card.id"
+                            :card="card"
+                        ></ContactInfoCard>
                     </div>
 
                     <!-- Map -->
@@ -73,24 +88,35 @@
                     <span class="text-neon-green font-bold tracking-[0.2em] uppercase text-sm">Get In Touch</span>
                     <h2 class="text-3xl font-heading font-bold text-white mt-2 mb-8 uppercase">Send Us A <span
                             class="text-neon-green">Message</span></h2>
+                    
+                    <!-- Success message -->
+                    <div
+                        v-if="submitStatus === 'success'"
+                        class="mb-6 p-4 border border-neon-green bg-neon-green/10 text-neon-green text-sm font-bold uppercase tracking-wider"
+                    >
+                        <i class="fa-solid fa-circle-check mr-2" />
+                        Message sent! We'll be in touch soon.
+                    </div>
 
                     <form class="space-y-6">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
-                                <input type="text" placeholder="Your Name"
+                                <input
+                                    v-model="form.name"
+                                    type="text" placeholder="Your Name"
                                     class="w-full bg-transparent border border-white/20 p-4 text-white placeholder-gray-500 focus:border-neon-green focus:outline-none transition-colors">
                             </div>
                             <div>
-                                <input type="email" placeholder="Your Email"
+                                <input v-model="form.email" type="email" placeholder="Your Email"
                                     class="w-full bg-transparent border border-white/20 p-4 text-white placeholder-gray-500 focus:border-neon-green focus:outline-none transition-colors">
                             </div>
                         </div>
                         <div>
-                            <input type="text" placeholder="Subject"
+                            <input v-model="form.subject" type="text" placeholder="Subject"
                                 class="w-full bg-transparent border border-white/20 p-4 text-white placeholder-gray-500 focus:border-neon-green focus:outline-none transition-colors">
                         </div>
                         <div>
-                            <textarea rows="5" placeholder="Message"
+                            <textarea v-model="form.message" rows="5" placeholder="Message"
                                 class="w-full bg-transparent border border-white/20 p-4 text-white placeholder-gray-500 focus:border-neon-green focus:outline-none transition-colors resize-none"></textarea>
                         </div>
                         <button type="submit"
