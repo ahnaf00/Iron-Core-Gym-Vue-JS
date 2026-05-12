@@ -40,16 +40,16 @@ const routes = [
         path:'/admin',
         component:AdminLayout,
         meta:{requiresAuth:true},
-        children:[
-            { path: '',         name: 'admin.dashboard', component: AdminDashboard },
-            { path: 'members',  name: 'admin.members',   component: AdminMembers   },
-            { path: 'trainers', name: 'admin.trainers',  component: AdminTrainers  },
-            { path: 'classes',  name: 'admin.classes',   component: AdminClasses   },
-            { path: 'pricing',  name: 'admin.pricing',   component: AdminPricing   },
-            { path: 'blog',     name: 'admin.blog',      component: AdminBlog      },
-            { path: 'messages', name: 'admin.messages',  component: AdminMessages  },
-            { path: 'settings', name: 'admin.settings',  component: AdminSettings  },
-        ],
+        children: [
+            { path: '',         name: 'admin.dashboard', component: AdminDashboard, meta: { requiresAuth: true, title: 'Dashboard' } },
+            { path: 'members',  name: 'admin.members',   component: AdminMembers,   meta: { requiresAuth: true, title: 'Members'   } },
+            { path: 'trainers', name: 'admin.trainers',  component: AdminTrainers,  meta: { requiresAuth: true, title: 'Trainers'  } },
+            { path: 'classes',  name: 'admin.classes',   component: AdminClasses,   meta: { requiresAuth: true, title: 'Classes'   } },
+            { path: 'pricing',  name: 'admin.pricing',   component: AdminPricing,   meta: { requiresAuth: true, title: 'Pricing'   } },
+            { path: 'blog',     name: 'admin.blog',      component: AdminBlog,      meta: { requiresAuth: true, title: 'Blog'      } },
+            { path: 'messages', name: 'admin.messages',  component: AdminMessages,  meta: { requiresAuth: true, title: 'Messages'  } },
+            { path: 'settings', name: 'admin.settings',  component: AdminSettings,  meta: { requiresAuth: true, title: 'Settings'  } },
+            ],
     },
 
     // ── 404 fallback ──────────────────────────────────────────
