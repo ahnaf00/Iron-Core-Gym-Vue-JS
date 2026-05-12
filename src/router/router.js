@@ -6,36 +6,54 @@ import Trainers from '../components/pages/frontend/Trainers.vue'
 import Pricing from '../components/pages/frontend/Pricing.vue'
 import Blog from '../components/pages/frontend/Blog.vue'
 import Contact from '../components/pages/frontend/Contact.vue'
+import Adminlogin from '../components/admin/Adminlogin.vue'
+import AdminLayout from '../components/admin/layout/AdminLayout.vue'
+import AdminDashboard from '../components/admin/AdminDashboard.vue'
+import AdminMembers from '../components/admin/AdminMembers.vue'
+import AdminTrainers from '../components/admin/AdminTrainers.vue'
+import AdminClasses from '../components/admin/AdminClasses.vue'
+import AdminPricing from '../components/admin/AdminPricing.vue'
+import AdminBlog from '../components/admin/AdminBlog.vue'
+import AdminMessages from '../components/admin/AdminMessages.vue'
+import AdminSettings from '../components/admin/AdminSettings.vue'
 
 const routes = [
+    // ── Frontend ──────────────────────────────────────────────
+    { path: '/',         name: 'home',     component: HomePage    },
+    { path: '/about',    name: 'about',    component: AboutPage   },
+    { path: '/classes',  name: 'classes',  component: ClassesPage },
+    { path: '/trainers', name: 'trainers', component: Trainers    },
+    { path: '/pricing',  name: 'pricing',  component: Pricing     },
+    { path: '/blog',     name: 'blog',     component: Blog        },
+    { path: '/contact',  name: 'contact',  component: Contact     },
+
+    // Admin login (Public)
     {
-        path:'/',
-        component:HomePage
+        path:'/admin/login',
+        name:'admin.login',
+        component:Adminlogin,
+        meta:{guestOnly:true}
     },
+
+    // Admin panel (Protected)
     {
-        path:'/about',
-        component:AboutPage
+        path:'/admin',
+        component:AdminLayout,
+        meta:{requiresAuth:true},
+        children:[
+            { path: '',         name: 'admin.dashboard', component: AdminDashboard },
+            { path: 'members',  name: 'admin.members',   component: AdminMembers   },
+            { path: 'trainers', name: 'admin.trainers',  component: AdminTrainers  },
+            { path: 'classes',  name: 'admin.classes',   component: AdminClasses   },
+            { path: 'pricing',  name: 'admin.pricing',   component: AdminPricing   },
+            { path: 'blog',     name: 'admin.blog',      component: AdminBlog      },
+            { path: 'messages', name: 'admin.messages',  component: AdminMessages  },
+            { path: 'settings', name: 'admin.settings',  component: AdminSettings  },
+        ],
     },
-    {
-        path:'/classes',
-        component:ClassesPage
-    },
-    {
-        path:'/trainers',
-        component:Trainers
-    },
-    {
-        path:'/pricing',
-        component:Pricing
-    },
-    {
-        path:'/blog',
-        component:Blog
-    },
-    {
-        path:'/contact',
-        component:Contact
-    }
+
+    // ── 404 fallback ──────────────────────────────────────────
+    { path: '/:pathMatch(.*)*', name: 'not-found', redirect: '/' },
 ]
 
 const router = createRouter({
