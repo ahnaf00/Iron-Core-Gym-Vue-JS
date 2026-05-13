@@ -1,4 +1,3 @@
-<!-- src/components/admin/trainers/TrainerModal.vue -->
 <script setup>
 import { reactive, watch, computed } from 'vue'
 

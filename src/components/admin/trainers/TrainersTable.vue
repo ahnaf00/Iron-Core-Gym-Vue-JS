@@ -25,7 +25,7 @@ const statuses = ['All', 'Active', 'Inactive']
 
 const filtered = computed(() =>
     props.trainers.filter(t => {
-        const matchSearch = t.name.toLowerCase().inlcudes(search.value.toLowerCase()) || t.email.toLowerCase().inlcudes(search.value.toLowerCase())
+        const matchSearch = t.name.toLowerCase().includes(search.value.toLowerCase()) || t.email.toLowerCase().includes(search.value.toLowerCase())
 
         const matchSpecialty = filterSpecialty.value === 'All' || t.specialty === filterSpecialty.value
 
