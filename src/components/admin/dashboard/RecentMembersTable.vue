@@ -1,4 +1,3 @@
-<!-- src/components/admin/dashboard/RecentMembersTable.vue -->
 <script setup>
 import { ref } from 'vue'
 import { RouterLink } from 'vue-router'
