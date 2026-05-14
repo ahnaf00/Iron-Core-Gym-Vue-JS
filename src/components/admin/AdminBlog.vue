@@ -1,4 +1,3 @@
-<!-- src/components/admin/AdminBlog.vue -->
 <script setup>
 import { ref, computed } from 'vue'
 import PostsTable from './blog/PostsTable.vue'

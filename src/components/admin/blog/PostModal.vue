@@ -1,4 +1,3 @@
-<!-- src/components/admin/blog/PostModal.vue -->
 <script setup>
 import { reactive, watch, computed } from 'vue'
 
