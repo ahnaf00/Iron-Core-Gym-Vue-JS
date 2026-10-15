@@ -6,4 +6,10 @@ export default defineConfig({
     vue(),
     tailwindcss()
   ],
+  // `npm run dev`: forward API calls to the local Laravel backend
+  server: {
+    proxy: {
+      '^/(api|sanctum|storage)/': 'http://localhost:8000',
+    },
+  },
 })

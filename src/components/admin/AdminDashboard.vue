@@ -17,7 +17,7 @@ const fetchDashboardStats = async () => {
     const response = await api.get('/admin/dashboard/stats')
     const data = response.data.data
 
-    stats.valus = [
+    stats.value = [
       {
         id: 1,
         icon: 'fa-solid fa-users',
