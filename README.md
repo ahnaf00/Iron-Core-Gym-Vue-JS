@@ -14,6 +14,19 @@
 
 ***
 
+## ☁️ Deployment
+
+This app runs on AWS behind CloudFront, an Application Load Balancer and a private EC2 instance, with a Laravel API and RDS MySQL.
+Architecture, evidence and the full write-up: **[iron-core-gym-aws](https://github.com/ahnaf00/iron-core-gym-aws)**
+
+The `Dockerfile` is a multi-stage build: Node 20 builds the app with Vite, then nginx serves `dist/`. `nginx.conf` does three jobs:
+
+- **SPA fallback.** `try_files $uri $uri/ /index.html` lets Vue Router's history mode handle deep links like `/admin/members`.
+- **API reverse proxy.** `/api/`, `/sanctum/` and `/storage/` are proxied to the Laravel container at `backend:8000` on the shared Docker network, so the browser sees one origin and session cookies just work.
+- **Cache headers.** `index.html` is `no-cache`, so a new deploy shows up immediately; `/assets/` files are content-hashed by Vite and cached for a year (`public, immutable`).
+
+***
+
 ## 📖 Overview
 
 Iron Core Gym is a Single Page Application (SPA) that combines a public-facing gym website with a full admin dashboard. The project was originally built as a static HTML/CSS template and has been fully migrated into a component-driven Vue 3 application.
